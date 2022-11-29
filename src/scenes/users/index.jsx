@@ -7,7 +7,7 @@ const Users = () => {
 
     return(
         <Box m="20px">
-            <Box display="flex" justifyContent="space-between" alignItems="center">
+            <Box display="flex" justifyContent="space-between"  alignItems="center">
                 <Header title="Users" subtitle="Welcome to your User Page"></Header>
             </Box>
         </Box>
