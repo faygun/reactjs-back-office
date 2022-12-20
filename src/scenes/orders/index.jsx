@@ -15,13 +15,13 @@ const Orders = () => {
   const [page, setPage] = useState(0);
   const [rowCount, setRowCount] = useState(orderData ? orderData.length : 0);
   const [isLoading, setIsLoading] = useState(false);
-  const [filter, setFilter] = useState({pageNumber: page, pageSize, orderFrom:  moment().format("YYYY-MM-DD")});
+  const [filter, setFilter] = useState({pageNumber: page, pageSize, orderFrom:  moment().add(-1, 'M').format("YYYY-MM-DD"), orderEnd:  moment().format("YYYY-MM-DD")});
   
   useEffect(()=>{
-    console.log("effect run... ", filter);
     setIsLoading(true);
 
     console.log(filter);
+
     fetch(process.env.REACT_APP_SERVICE_ORDER_API, {
       method:"POST",
       headers:{
@@ -134,9 +134,11 @@ const Orders = () => {
                   components={{
                     Toolbar: toolBarGrid,
                     NoRowsOverlay: CustomNoRowsOverlay,
-                    NoResultsOverlay: CustomNoRowsOverlay
+                    NoResultsOverlay: CustomNoRowsOverlay,
+                    LoadingOverlay: LoadingComponent
                   }} >
-                  {isLoading ? (<LoadingComponent/>) : ("")}
+
+                  {/* {isLoading ? (<LoadingComponent/>) : ("")} */}
                   
                   </DataGrid>
       </Box>

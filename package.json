@@ -27,6 +27,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build-test": "set REACT_APP_ENV=test & react-scripts build",
+    "build-prod": "set REACT_APP_ENV=production & react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -4,7 +4,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { tokens } from "../theme";
 import dayjs from "dayjs"
 import { useEffect, useState } from "react"
-import LoadingComponent from "./Loading";
+import moment from 'moment';
+
 const FilterBox = (props) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -16,11 +17,24 @@ const FilterBox = (props) => {
     const [orderStatus, setOrderStatus] = useState([]);
     const [brandList, setBrandList] = useState([{id:"9d21fdd7-9986-458c-9542-e325d546036e", name:"Crea Socks"}])
     const [brand, setBrand] = useState("");
-    const [orderFrom, setOrderFrom] = useState(new Date());
+    var orderEndDate = new Date();
+    var now = new Date();
+    var orderFromDate = new Date(now.setMonth(now.getMonth() - 1))
+    const [orderEnd, setOrderEnd] = useState(moment());
+    const [orderFrom, setOrderFrom] = useState(moment().add(-1, 'M'));
     const [pageSize, setPageSize] = useState(100)
 
     const clickSearchButton = ()=>{
-        const reqModel = {pageNumber:0, pageSize, orderNumber, customerEmail, currency, orderStatus, brand, orderFrom: orderFrom ? dayjs(orderFrom).format("YYYY-MM-DD") : null};
+        const reqModel = {
+            pageNumber:0, 
+            pageSize, 
+            orderNumber, 
+            customerEmail, 
+            currency, 
+            orderStatus, 
+            brand, 
+            orderFrom: orderFrom ? dayjs(orderFrom).format("YYYY-MM-DD") : null, 
+            orderEnd: orderEnd ? dayjs(orderEnd).format("YYYY-MM-DD") : null};
         props.onSearchOrder(reqModel);
     };
 
@@ -29,6 +43,7 @@ const FilterBox = (props) => {
         setBrand("");
         setOrderStatus("");
         setOrderFrom(null)
+        setOrderEnd(null)
         setCustomerEmail("");
         setOrderNumber("");
         setPageSize(100)
@@ -49,6 +64,15 @@ const FilterBox = (props) => {
                         onChange={(selected) => {setOrderFrom(selected);}}
                     />
             </LocalizationProvider>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                        inputFormat="DD-MM-YYYY"
+                        renderInput={(props) => <TextField {...props} />}
+                        label="Order End"
+                        value={orderEnd}
+                        onChange={(selected) => {setOrderEnd(selected);}}
+                    />
+            </LocalizationProvider>
             {/* <Select autoWidth={false} multiple={false} displayEmpty id="currency" label="Currency" value={currency} onChange={(e)=> setCurrency(e.target.value)} input={<OutlinedInput/>} 
                     renderValue={(selected)=>{
                         if(selected.length === 0){
@@ -64,7 +88,7 @@ const FilterBox = (props) => {
                     <MenuItem key={index} value={item}>{item}</MenuItem>
                 ))}
             </Select> */}
-            <FormControl variant="outlined" margin={"none"} sx={{width: 1/7}}>
+            <FormControl variant="outlined" margin={"none"} style={{minWidth:120}} >
                 <InputLabel id="orderStatus-select-label" focused={false} sx={{color: colors.primary[100]}}>Order Status</InputLabel>
                 <Select multiple={false} displayEmpty id="status" value={orderStatus} onChange={(e)=> setOrderStatus(e.target.value)} 
                     // renderValue={(selected)=>{
@@ -83,7 +107,7 @@ const FilterBox = (props) => {
                     ))}
                 </Select>
             </FormControl>
-            <FormControl variant="outlined" margin={"none"} sx={{width: 1/7}}>
+            <FormControl variant="outlined" margin={"none"} style={{minWidth:120}} >
                 <InputLabel id="brand-select-label" focused={false} sx={{color: colors.primary[100]}}>Brand</InputLabel>
                 <Select  multiple={false} displayEmpty id="brand" labelId="brand-select-label" value={brand} onChange={(e)=> setBrand(e.target.value)}>
                     {/* <MenuItem disabled value="">
@@ -94,7 +118,7 @@ const FilterBox = (props) => {
                     ))}
                 </Select>
             </FormControl>
-            <FormControl variant="outlined" margin={"none"} sx={{width: 1/7}}>
+            <FormControl variant="outlined" margin={"none"} style={{minWidth:120}} >
                 <InputLabel id="pageSize-select-label" focused={false} sx={{color: colors.primary[100]}}>Page Size</InputLabel>
                 <Select autoWidth={false} multiple={false} displayEmpty id="pageSize" value={pageSize} onChange={(e)=> setPageSize(e.target.value)} >
                     {/* <MenuItem disabled value="">
@@ -107,8 +131,8 @@ const FilterBox = (props) => {
                     <MenuItem key={4} value={3000}>3000</MenuItem>
                 </Select>
             </FormControl>
-            <Button onClick={clickSearchButton} variant="contained" size="large" sx={{ marginLeft: "10px", backgroundColor: colors.greenAccent[500], ":hover": {backgroundColor: colors.greenAccent[400]}}}>Search</Button>
-            <Button onClick={resetFilter} variant="contained" size="large" sx={{ marginLeft: "10px", backgroundColor: colors.blueAccent[500], ":hover": {backgroundColor: colors.blueAccent[400]}}}>Reset</Button>
+            <Button onClick={clickSearchButton} variant="contained" size="large" sx={{ minWidth: "75px", marginLeft: "10px", backgroundColor: colors.greenAccent[500], ":hover": {backgroundColor: colors.greenAccent[400]}}}>Search</Button>
+            <Button onClick={resetFilter} variant="contained" size="large" sx={{ minWidth: "75px", marginLeft: "10px", backgroundColor: colors.blueAccent[500], ":hover": {backgroundColor: colors.blueAccent[400]}}}>Reset</Button>
         </Box>
     )
 }
