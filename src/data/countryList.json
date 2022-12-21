@@ -1,0 +1,98 @@
+[
+    {
+      "country": "Austria",
+      "locale": "de-AT"
+    },
+    {
+      "country": "Belgium",
+      "locale": "nl-BE, fr-BE"
+    },
+    {
+      "country": "Croatia",
+      "locale": "hr-HR"
+    },
+    {
+      "country": "Czech Republic",
+      "locale": "cs-CZ"
+    },
+    {
+      "country": "Denmark",
+      "locale": "da-DK"
+    },
+    {
+      "country": "Estonia",
+      "locale": "et-EE"
+    },
+    {
+      "country": "Finland",
+      "locale": "fi-FI"
+    },
+    {
+      "country": "France",
+      "locale": "fr-FR"
+    },
+    {
+      "country": "Germany",
+      "locale": "de-DE"
+    },
+    {
+      "country": "Hungary",
+      "locale": "hu-HU"
+    },
+    {
+      "country": "Italy",
+      "locale": "it-IT"
+    },
+    {
+      "country": "Latvia",
+      "locale": "lv-LV"
+    },
+    {
+      "country": "Lithuania",
+      "locale": "lt-LT"
+    },
+    {
+      "country": "Netherlands",
+      "locale": "nl-NL"
+    },
+    {
+      "country": "Norway",
+      "locale": "no-NO"
+    },
+    {
+      "country": "Poland",
+      "locale": "pl-PL"
+    },
+    {
+      "country": "Republic of Ireland",
+      "locale": "en-IE"
+    },
+    {
+      "country": "Romania",
+      "locale": "ro-RO"
+    },
+    {
+      "country": "Slovakia",
+      "locale": "sk-SK"
+    },
+    {
+      "country": "Slovenia",
+      "locale": "sl-SI"
+    },
+    {
+      "country": "Spain",
+      "locale": "es-ES"
+    },
+    {
+      "country": "Sweden",
+      "locale": "sv-SE"
+    },
+    {
+      "country": "Switzerland",
+      "locale": "fr-CH, de-CH"
+    },
+    {
+      "country": "United Kingdom",
+      "locale": "en-GB"
+    }
+   ]

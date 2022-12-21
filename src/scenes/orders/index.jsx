@@ -7,6 +7,7 @@ import FilterBox from "../../components/Filter";
 import CustomNoRowsOverlay from "../../components/Overlay"; 
 import LoadingComponent from "../../components/Loading";
 import moment from 'moment';
+import countryList from '../../data/countryList.json';
 const Orders = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -17,6 +18,14 @@ const Orders = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [filter, setFilter] = useState({pageNumber: page, pageSize, orderFrom:  moment().add(-1, 'M').format("YYYY-MM-DD"), orderEnd:  moment().format("YYYY-MM-DD")});
   
+  const findCountrybyCode = (code)=>{
+    var array = countryList.filter((c)=> c.locale === code)
+
+    if(array && array.length > 0)
+      return array[0].country
+    
+    return code;
+  }
   useEffect(()=>{
     setIsLoading(true);
 
@@ -43,9 +52,7 @@ const Orders = () => {
         setOrderData([]);
         setRowCount(0);
       }
-        
 
-      console.log(orderList);
       setIsLoading(false);
     }).catch((err)=>{
         setIsLoading(false);
@@ -68,6 +75,7 @@ const Orders = () => {
     {field: "city", headerName:"Shipping Address", flex:1, valueGetter:(params)=>{ return params.row.attributes.shipping_address.city + ", " + params.row.attributes.shipping_address.country_code}},
     {field: "order_lines_price_amount", headerName:"Total Value", flex:1, valueGetter:(params)=>{ return params.row.attributes.order_lines_price_amount}},
     {field: "order_lines_price_currency", headerName:"Currency", flex:1, valueGetter:(params)=>{ return params.row.attributes.order_lines_price_currency}},
+    {field: "locale", headerName:"Order Locale", flex:1, valueGetter:(params)=>{ return findCountrybyCode(params.row.attributes.locale)}},
     {field: "order_date", headerName:"Order Date", flex:1, valueGetter:(params)=>{ return params.row.attributes.order_date.split('T')[0]}},
     {field: "delivery_end_date", headerName:"Delivery Date", flex:1, valueGetter:(params)=>{ return params.row.attributes.delivery_end_date.split('T')[0]}}
   ]
