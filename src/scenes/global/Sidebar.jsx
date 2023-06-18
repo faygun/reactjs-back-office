@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CheckroomOutlinedIcon from "@mui/icons-material/CheckroomOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import { useAuth } from "../../hooks/useAuth";
 
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -34,6 +34,10 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(window.innerWidth <= 760);
   const [selected, setSelected] = useState("Dashboard");
+  const { user } = useAuth();
+
+  if(!user)
+    return
 
   return (
     <Box
@@ -93,7 +97,7 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Hi, User Name
+                  Hi, {user.email}
                 </Typography>
               </Box>
             </Box>
@@ -115,13 +119,13 @@ const Sidebar = () => {
             >
               Pages
             </Typography>
-            <Item
+            {/* <Item
               title="Users"
               to="/users"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             <Item
               title="Products"
               to="/products"

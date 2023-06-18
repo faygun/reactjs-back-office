@@ -30,3 +30,6 @@ body,
 ::-webkit-scrollbar-track:hover{
   background: #555;
 }
+.wrapper {
+  padding: 20px;
+}
