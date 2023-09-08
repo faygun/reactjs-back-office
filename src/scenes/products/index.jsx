@@ -25,7 +25,8 @@ const Products = () => {
 
         fetch(process.env.REACT_APP_SERVICE_PRODUCT_API, {
             method:"POST",
-            body: formData
+            body: formData,
+            mode:'cors'
           })
           .then(response => response.json())
           .then((data)=>{
